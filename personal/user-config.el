@@ -23,3 +23,15 @@
       python-shell-interpreter "jupyter"
       python-shell-interpreter-args "console --simple-prompt"
       )
+
+(defun shadow-cljs-shells ()
+  "Create some default eshell "
+  (interactive)
+  (eshell nil)
+  (rename-buffer "*eshell*<git>")
+  (eshell nil)
+  (rename-buffer "*eshell*<flask>")
+  (eshell nil)
+  (rename-buffer "*eshell*<shadow-cljs-server>")
+  (eshell nil)
+  (rename-buffer "*eshell*<shadow-cljs>"))
