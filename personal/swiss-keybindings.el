@@ -51,3 +51,6 @@
 
 ;; Should write for console C-c C-y instead of C-c C-z
 (define-key key-translation-map (kbd "C-c C-y") (kbd "C-c C-z"))
+
+(define-key key-translation-map (kbd "M-[") (kbd "M-{"))
+(define-key key-translation-map (kbd "M-]") (kbd "M-}"))
