@@ -54,3 +54,5 @@
 
 (define-key key-translation-map (kbd "M-[") (kbd "M-{"))
 (define-key key-translation-map (kbd "M-]") (kbd "M-}"))
+
+(global-set-key (kbd "C-x C-b") 'ibuffer)
