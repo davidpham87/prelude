@@ -1,6 +1,4 @@
 ;; Python configure
-
-
 ;; for emacs-ipython over ssh
 (setq request-curl-options '("--insecure"))
 
@@ -20,8 +18,8 @@
       ;; "';'.join(get_ipython().Completer.all_completions('''%s'''))\n"
       python-shell-completion-native-disabled-interpreters
       '("ipython3" "ipython" "jupyter")
-      python-shell-interpreter "jupyter"
-      python-shell-interpreter-args "console --simple-prompt"
+      python-shell-interpreter "ipython3"
+      python-shell-interpreter-args " --simple-prompt -i"
       )
 
 (defun shadow-cljs-shells ()
