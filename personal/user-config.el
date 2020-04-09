@@ -39,3 +39,7 @@
   (rename-buffer "*eshell*<shadow-cljs-server>")
   (eshell nil)
   (rename-buffer "*eshell*<shadow-cljs>"))
+
+(require 'exwm)
+(require 'exwm-config)
+(exwm-config-default)
