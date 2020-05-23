@@ -19,3 +19,6 @@
   "Interactively set frame width"
   (interactive "p")
   (set-frame-width (selected-frame) arg))
+
+(setq split-width-threshold 120)
+(setq split-height-threshold 160)

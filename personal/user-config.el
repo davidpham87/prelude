@@ -40,6 +40,10 @@
   (eshell nil)
   (rename-buffer "*eshell*<shadow-cljs>"))
 
-(require 'exwm)
-(require 'exwm-config)
-(exwm-config-default)
+;; (require 'exwm)
+;; (require 'exwm-config)
+;; (exwm-config-default)
+(prelude-require-package 'pandoc-mode)
+
+(add-hook 'markdown-mode-hook 'pandoc-mode)
+(add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
