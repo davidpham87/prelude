@@ -5,7 +5,7 @@
 ;; Author: David Pham <davidpham87@gmail.com>
 ;; URL: https://github.com/bbatsov/prelude
 ;; Version: 1.0.0
-;; Keywords: convenience
+;; Keywords: R, ESS
 
 ;; This file is not part of GNU Emacs.
 
@@ -32,7 +32,7 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(prelude-require-package 'ess)
+;; (prelude-require-package '(ess))
 
 (when (boundp 'company-backends)
   (prelude-require-package 'company-quickhelp)
@@ -62,7 +62,7 @@
   (setq comint-scroll-to-bottom-on-input t)
   (setq comint-scroll-to-bottom-on-output t)
   (setq comint-move-point-for-output t)
-  (local-set-key (kbd "<C-dead-circumflex>") 'my-ess-eval)
+  (local-set-key (kbd "<C-dead-circumflex>") 'ess-eval-fast)
   (rainbow-mode t)
   (company-mode)
   (company-quickhelp-mode)
@@ -74,21 +74,21 @@
 (add-hook 'ess-mode-hook (lambda ()
                            (run-hooks 'prelude-ess-mode-hook)))
 
-(defun my-ess-start-R ()
+(defun prelude-ess-start-R ()
   (interactive)
   (if (not (member "*R*" (mapcar (function buffer-name) (buffer-list))))
       (R)))
 
-(defun my-ess-eval ()
+(defun prelude-ess-eval ()
   "Eval region faster"
   (interactive)
-  (my-ess-start-R)
+  (prelude-ess-start-R)
   (if (and transient-mark-mode mark-active)
       (call-interactively 'ess-eval-region)
     (call-interactively 'ess-eval-line-and-step)))
 
 ;; To clear the shell in R
-(defun clear-shell ()
+(defun ess-clear-shell ()
   (interactive)
   (let ((old-max comint-buffer-maximum-size))
     (setq comint-buffer-maximum-size 0)
@@ -104,13 +104,11 @@
              (company-quickhelp-mode)
              (rainbow-delimiters-mode t)))
 
-(require 'ess-site)
-
-;; To reset the size of the terminal in R in ESS use C-c w to reset
-;; the size of the console
-(defun my-ess-post-run-hook ()
+;; To reset the size of the terminal in R in ESS use C-c w to reset the size of
+;; the console
+(defun prelude-ess-post-run-hook ()
   (ess-execute-screen-options)
   (local-set-key "\C-cw" 'ess-execute-screen-options))
-(add-hook 'ess-post-run-hook 'my-ess-post-run-hook)
+(add-hook 'ess-post-run-hook 'prelude-ess-post-run-hook)
 
 (provide 'prelude-ess)
