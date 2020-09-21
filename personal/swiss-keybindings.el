@@ -6,6 +6,7 @@
 (global-set-key [remap other-window] 'other-window)
 (global-set-key (kbd "C-'") 'ace-window) ;  key change windows
 (global-set-key (kbd "C-x o") 'other-window)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 
 (delete-selection-mode t) ; Delete selection when pressing [delete] key
@@ -54,3 +55,5 @@
 
 (define-key key-translation-map (kbd "M-[") (kbd "M-{"))
 (define-key key-translation-map (kbd "M-]") (kbd "M-}"))
+(define-key key-translation-map (kbd "Ŧ") (kbd "M-T"))
+(global-set-key (kbd "M-T")  'sp-transpose-sexp)
