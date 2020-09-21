@@ -1,11 +1,9 @@
 ;;; prelude-ruby.el --- Emacs Prelude: A nice setup for Ruby (and Rails) devs.
 ;;
-;; Copyright © 2011-2018 Bozhidar Batsov
+;; Copyright © 2011-2020 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
-;; Version: 1.0.0
-;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
 

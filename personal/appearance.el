@@ -5,7 +5,6 @@
 (add-to-list 'default-frame-alist '(width . 81))
 (setq-default fill-column 79)           ; Automatic width formatting with M-q
 
-
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
 (setq indent-line-function 'insert-tab)
@@ -16,12 +15,10 @@
 (setq aw-keys '(?a ?s ?d ?f ?j ?k ?l ?k ?é))
 (setq aw-scope 'frame)
 
-;; (mapc (function
-;;        (lambda (x) (add-hook x 'rainbow-enable-in-mode)))
-;;       '(text-mode-hook LaTeX-mode-hook emacs-lisp-mode python-mode-hook
-;;                        R-mode))
-
 (defun set-frame-width-interactive (arg)
   "Interactively set frame width"
   (interactive "p")
   (set-frame-width (selected-frame) arg))
+
+(setq split-width-threshold 120)
+(setq split-height-threshold 160)

@@ -1,6 +1,8 @@
 ;; Python configure
 (require 'flycheck-clj-kondo)
 
+
+
 ;; for emacs-ipython over ssh
 (setq request-curl-options '("--insecure"))
 
@@ -20,10 +22,15 @@
       ;; "';'.join(get_ipython().Completer.all_completions('''%s'''))\n"
       python-shell-completion-native-disabled-interpreters
       '("ipython3" "ipython" "jupyter")
+
       python-shell-interpreter "jupyter-console"
-      python-shell-interpreter-args "--simple-prompt"
-      pythonic-interpreter "python3"
-      )
+      python-shell-interpreter-args "--simple-prompt -i"
+      pythonic-interpreter "python3")
+
+
+(prelude-require-package 'conda)
+(custom-set-variables
+ '(conda-anaconda-home "~/.conda"))
 
 (defun shadow-cljs-shells ()
   "Create some default eshell "
@@ -36,3 +43,11 @@
   (rename-buffer "*eshell*<shadow-cljs-server>")
   (eshell nil)
   (rename-buffer "*eshell*<shadow-cljs>"))
+
+;; (require 'exwm)
+;; (require 'exwm-config)
+;; (exwm-config-default)
+(prelude-require-package 'pandoc-mode)
+
+(add-hook 'markdown-mode-hook 'pandoc-mode)
+(add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)

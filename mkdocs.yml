@@ -1,6 +1,6 @@
 site_name: "Prelude: A sleek, modern, simple and powerful Emacs experience for everyone"
 repo_url: https://github.com/bbatsov/prelude
-copyright: "Copyright (C) 2019 Bozhidar Batsov and Prelude contributors"
+copyright: "Copyright (C) 2011-2020 Bozhidar Batsov and Prelude contributors"
 docs_dir: doc
 pages:
 - Home: index.md
@@ -9,7 +9,9 @@ pages:
 - Configuration: configuration.md
 - Modules:
     - Overview: modules/index.md
+    - Company: modules/company.md
     - ERC: modules/erc.md
+    - Programming: modules/programming.md
     - Python: modules/python.md
 - FAQ: faq.md
 - Troubleshooting: troubleshooting.md

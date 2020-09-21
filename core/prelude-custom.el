@@ -1,11 +1,9 @@
 ;;; prelude-custom.el --- Emacs Prelude: Prelude's customizable variables.
 ;;
-;; Copyright © 2011-2018 Bozhidar Batsov
+;; Copyright © 2011-2020 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
-;; Version: 1.0.0
-;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
 
@@ -37,6 +35,21 @@
   "Emacs Prelude configuration."
   :prefix "prelude-"
   :group 'convenience)
+
+(defcustom prelude-minimalistic-ui nil
+  "Controls whether to display the menu-bar and line numbers.
+Note that the toolbar is always hidden regardless of this setting."
+  :type 'boolean
+  :group 'prelude
+  :package-version '(prelude . "1.1"))
+
+(defcustom prelude-super-keybindings t
+  "Controls whether to use the Super key in keybindings.
+They can be problematic in some operating systems (e.g. Windows)
+or desktop environments that make heavy use of them."
+  :type 'boolean
+  :group 'prelude
+  :package-version '(prelude . "1.1"))
 
 (defcustom prelude-auto-save t
   "Non-nil values enable Prelude's auto save."
@@ -71,7 +84,7 @@ Prelude recommends you only put personal customizations in the
 personal folder.  This variable allows you to specify a specific
 folder as the one that should be visited when running
 `crux-find-user-init-file'.  This can be easily set to the desired buffer
-in lisp by putting `(setq prelude-user-init-file load-file-name)'
+in Lisp by putting `(setq prelude-user-init-file load-file-name)'
 in the desired elisp file."
   :type 'string
   :group 'prelude)
@@ -80,6 +93,12 @@ in the desired elisp file."
   '(conf-mode coffee-mode haml-mode python-mode slim-mode yaml-mode)
   "Modes for which auto-indenting is suppressed."
   :type 'list
+  :group 'prelude)
+
+(defcustom prelude-format-on-save t
+  "Run mode specific format on file before it's saved.
+Currently only applies to tide-mode."
+  :type 'boolean
   :group 'prelude)
 
 (defcustom prelude-yank-indent-modes '(LaTeX-mode TeX-mode)

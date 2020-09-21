@@ -1,11 +1,9 @@
 ;;; prelude-ocaml.el --- Emacs Prelude: decent Perl coding settings.
 ;;
-;; Copyright © 2014-2018 Geoff Shannon
+;; Copyright © 2014-2020 Geoff Shannon
 ;;
 ;; Author: Geoff Shannon <geoffpshannon@gmail.com>
 ;; URL: https://github.com/bbatsov/prelude
-;; Version: 1.0.0
-;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
 
@@ -16,7 +14,7 @@
 ;; These setups for ocaml assume that you are using the OPAM package
 ;; manager (http://opam.ocaml.org/).
 
-;; Because of the apparent complexity of getting emacs environment
+;; Because of the apparent complexity of getting Emacs environment
 ;; variables setup to use opam correctly, it is instead easier to use
 ;; opam itself to execute any necessary commands.
 

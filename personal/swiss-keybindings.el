@@ -55,5 +55,9 @@
 
 (define-key key-translation-map (kbd "M-[") (kbd "M-{"))
 (define-key key-translation-map (kbd "M-]") (kbd "M-}"))
+
 (define-key key-translation-map (kbd "Ŧ") (kbd "M-T"))
 (global-set-key (kbd "M-T")  'sp-transpose-sexp)
+
+
+(global-set-key (kbd "C-x C-b") 'ibuffer)
