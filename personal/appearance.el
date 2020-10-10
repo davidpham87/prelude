@@ -22,3 +22,6 @@
 
 (setq split-width-threshold 120)
 (setq split-height-threshold 160)
+
+(setq history-delete-duplicates t)
+(setq history-length 100)
