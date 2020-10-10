@@ -37,7 +37,7 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-;(package-initialize)
+                                        ;(package-initialize)
 
 (defvar prelude-user
   (getenv
@@ -68,7 +68,7 @@ by Prelude.")
   "This directory is for your personal configuration, that you want loaded before Prelude.")
 (defvar prelude-vendor-dir (expand-file-name "vendor" prelude-dir)
   "This directory houses packages that are not yet available in ELPA (or MELPA).")
-(defvar prelude-savefile-dir (expand-file-name "savefile" prelude-dir)
+(defvar prelude-savefile-dir (expand-file-name "savefile" user-emacs-directory)
   "This folder stores all the automatically generated save/history-files.")
 (defvar prelude-modules-file (expand-file-name "prelude-modules.el" prelude-personal-dir)
   "This file contains a list of modules that will be loaded by Prelude.")
@@ -77,13 +77,13 @@ by Prelude.")
   (make-directory prelude-savefile-dir))
 
 (defun prelude-add-subfolders-to-load-path (parent-dir)
- "Add all level PARENT-DIR subdirs to the `load-path'."
- (dolist (f (directory-files parent-dir))
-   (let ((name (expand-file-name f parent-dir)))
-     (when (and (file-directory-p name)
-                (not (string-prefix-p "." f)))
-       (add-to-list 'load-path name)
-       (prelude-add-subfolders-to-load-path name)))))
+  "Add all level PARENT-DIR subdirs to the `load-path'."
+  (dolist (f (directory-files parent-dir))
+    (let ((name (expand-file-name f parent-dir)))
+      (when (and (file-directory-p name)
+                 (not (string-prefix-p "." f)))
+        (add-to-list 'load-path name)
+        (prelude-add-subfolders-to-load-path name)))))
 
 ;; add Prelude's directories to Emacs's `load-path'
 (add-to-list 'load-path prelude-core-dir)
@@ -121,6 +121,14 @@ by Prelude.")
 ;; Linux specific settings
 (when (eq system-type 'gnu/linux)
   (require 'prelude-linux))
+
+;; WSL specific setting
+(when (and (eq system-type 'gnu/linux) (getenv "WSLENV"))
+  (require 'prelude-wsl))
+
+;; Windows specific settings
+(when (eq system-type 'windows-nt)
+  (require 'prelude-windows))
 
 (message "Loading Prelude's modules...")
 

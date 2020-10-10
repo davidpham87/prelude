@@ -36,7 +36,6 @@
 
 ;;; Code:
 
-(require 'thingatpt)
 (require 'cl-lib)
 
 (defun prelude-buffer-mode (buffer-or-name)
@@ -73,7 +72,7 @@ PROMPT sets the `read-string prompt."
 
 (defvar prelude-tips
   '("Press <C-c o> to open a file with external program."
-    "Press <C-c p f> to navigate a project's files with ido."
+    "Press <C-c p f> to navigate a project's files."
     "Press <s-r> to open a recently visited file."
     "Press <C-c p s g> to run grep on a project."
     "Press <C-c p p> to switch between projects."
@@ -94,9 +93,9 @@ PROMPT sets the `read-string prompt."
     "Press <C-Backspace> to kill a line backwards."
     "Press <C-S-Backspace> or <s-k> to kill the whole line."
     "Press <s-j> or <C-^> to join lines."
-    "Press <s-.> or <C-c j> to jump to the start of a word in any visible window."
+    "Press <s-.> or <C-c v> to jump to the start of a word in any visible window."
     "Press <f12> to toggle the menu bar."
-    "Explore the Tools->Prelude menu to find out about some of Prelude extensions to Emacs."
+    "Explore the Prelude menu to find out about some of Prelude extensions to Emacs."
     "Access the official Emacs manual by pressing <C-h r>."))
 
 (defun prelude-tip-of-the-day ()

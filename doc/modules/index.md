@@ -52,29 +52,29 @@ To use a module you simple have to require it. No new concepts. No magic.
 The following programming languages have enhanced support in Prelude:
 
 - C/C++
-- Clojure
+- [Clojure](clojure.md)
 - CoffeeScript
-- Common Lisp
+- [Common Lisp](common_lisp.md)
 - CSS
 - [Dart](dart.md)
-- Emacs Lisp
+- [Emacs Lisp](emacs_lisp.md)
 - Erlang
 - Elixir
 - Go
 - Haskell
 - JavaScript
 - LaTeX
-- Lisp Base (common foundation for Lisp modules)
+- [Lisp Base](lisp.md) (common foundation for Lisp modules)
+- LSP (common foundation for all modules relying on `lsp-mode`)
 - Markdown
 - OCaml
-- Org Mode
 - Perl
 - [Python](python.md)
 - [Programming Base](programming.md) (common foundation for programming modules)
-- Ruby
+- [Ruby](ruby.md)
 - Rust
 - Scala
-- Scheme
+- [Scheme](scheme.md)
 - SCSS
 - Shell
 - TypeScript
@@ -91,3 +91,4 @@ The following programming languages have enhanced support in Prelude:
 - ido
 - ivy
 - key-chord
+- Org Mode
