@@ -1,8 +1,6 @@
 ;; Python configure
 (require 'flycheck-clj-kondo)
 
-
-
 ;; for emacs-ipython over ssh
 (setq request-curl-options '("--insecure"))
 
@@ -23,7 +21,7 @@
       python-shell-completion-native-disabled-interpreters
       '("ipython3" "ipython" "jupyter")
 
-      python-shell-interpreter "jupyter-console"
+      python-shell-interpreter "ipython3"
       python-shell-interpreter-args "--simple-prompt -i"
       pythonic-interpreter "python3")
 
