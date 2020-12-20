@@ -59,8 +59,11 @@
 (define-key key-translation-map (kbd "Ŧ") (kbd "M-T"))
 (global-set-key (kbd "M-T")  'sp-transpose-sexp)
 
+(global-set-key (kbd "<f9>") 'tab-bar-mode)
+(global-set-key (kbd "C-T") 'tab-bar-mode)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
 
 
 ;; ;; Rebind altgr + key to the correct default behavior
@@ -86,5 +89,3 @@
 ;; (global-set-key (kbd "M-è") '"[")
 ;; (global-set-key (kbd "M-$") '"}")
 ;; (global-set-key (kbd "C-<") '"\\")
-
-
