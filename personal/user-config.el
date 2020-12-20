@@ -7,6 +7,9 @@
 (setq dired-guess-shell-alist-user
       '(("\\.pdf$" "evince") ("\\.html$" "google-chrome")))
 
+
+(prelude-require-package 'conda)
+
 (setq ein:console-args
       '((8000 . '("--ssh" "aws-jupyter" "--simple-prompt"))
         (8888 . '("--ssh" "aws-jupyter" "--simple-prompt"))
@@ -21,14 +24,14 @@
       python-shell-completion-native-disabled-interpreters
       '("ipython3" "ipython" "jupyter")
 
+      ;; better command line experience
       python-shell-interpreter "ipython3"
       python-shell-interpreter-args "--simple-prompt -i"
-      pythonic-interpreter "python3")
+      pythonic-interpreter "python3"
 
+      ;; insure this is the correct path as conda will be used with ~conda-anaconda-home/bin/conda
+      conda-anaconda-home "/usr/lib/miniconda3")
 
-(prelude-require-package 'conda)
-(custom-set-variables
- '(conda-anaconda-home "~/.conda"))
 
 (defun shadow-cljs-shells ()
   "Create some default eshell "
@@ -45,6 +48,7 @@
 ;; (require 'exwm)
 ;; (require 'exwm-config)
 ;; (exwm-config-default)
+
 (prelude-require-package 'pandoc-mode)
 
 (add-hook 'markdown-mode-hook 'pandoc-mode)
