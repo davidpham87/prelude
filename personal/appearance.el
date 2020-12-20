@@ -1,3 +1,5 @@
+;; Sets a few personal decision about the look of emacs.
+
 (when (member "Source Code Pro" (font-family-list))
   (add-to-list 'default-frame-alist '(font . "Source Code Pro-10")))
 
@@ -25,3 +27,9 @@
 
 (setq history-delete-duplicates t)
 (setq history-length 100)
+
+;; worse case, but this in the custom-faces
+(setq
+ tab-bar '(:foreground "#DCDCCC" :background "#3F3F3F" :inherit variable-pitch)
+ tab-bar-tab '(:background "#4F4F4F" :inherit tab-bar :box (:line-width 0 :style pressed-button))
+ tab-bar-tab-inactive '(:background "#3F3F3F" :box (:line-width 0 :style released-button)))
