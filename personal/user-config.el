@@ -32,6 +32,12 @@
       ;; insure this is the correct path as conda will be used with ~conda-anaconda-home/bin/conda
       conda-anaconda-home "/usr/lib/miniconda3")
 
+(defun conda-env-list-custom ()
+  (let* ((conda-anaconda-home "/usr/lib/miniconda3"))
+    (conda-env-list)))
+
+;; (conda-env-list-custom)
+
 
 (defun shadow-cljs-shells ()
   "Create some default eshell "
