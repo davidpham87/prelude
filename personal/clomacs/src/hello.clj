@@ -1,6 +1,5 @@
 (ns hello
   (:require
-   [clojure.edn :as edn]
    [clojure.string :as str]))
 
 (defn main
@@ -19,5 +18,5 @@
 
 (comment
   (into {} (map vec (partition 2 '(1 2 3 4))))
-  (rand-int )
-  )
+  (rand-int)
+  (main [:a 2 :b 4]))

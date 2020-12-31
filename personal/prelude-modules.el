@@ -9,3 +9,4 @@
 (require 'prelude-company)
 (require 'prelude-latex)
 (require 'prelude-ivy)
+(require 'prelude-lsp)

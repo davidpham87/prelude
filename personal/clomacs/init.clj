@@ -1,5 +1,3 @@
-#!/usr/bin/env bb
-
 (import [java.net ServerSocket]
         [java.io File]
         [java.lang ProcessBuilder$Redirect])

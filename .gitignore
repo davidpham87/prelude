@@ -31,4 +31,8 @@ var/
 org-roam.db
 anaconda-mode/* 
 eln-cache/*
-clomacs/*  
+.cache/
+.clj-kondo/
+.lsp-session-v1
+.lsp/
+  
