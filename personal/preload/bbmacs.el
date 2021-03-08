@@ -61,7 +61,7 @@
 (defun bbmacs-init ()
   (interactive)
   (bbmacs-bb-process bbmacs-clomacs-dir bbmacs-port)
-  (sleep-for 0 100)
+  (sleep-for 0 300)
   (bbmacs-connect))
 
 (defun bbmacs-reset ()

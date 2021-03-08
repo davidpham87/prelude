@@ -8,6 +8,7 @@
   :custom
   (lsp-auto-guess-root t)
   (lsp-file-watch-threshold 1500)  ; pyright has more than 1000
+
   :custom-face
   (lsp-face-highlight-read ((t (:underline t :background nil :foreground nil))))
   (lsp-face-highlight-write ((t (:underline t :background nil :foreground nil))))
@@ -21,7 +22,16 @@
   (setq lsp-enable-xref nil)
   (add-to-list 'lsp-language-id-configuration '(clojure-mode . "clojure-mode"))
   (add-to-list 'lsp-language-id-configuration '(clojurec-mode . "clojurec-mode"))
-  (add-to-list 'lsp-language-id-configuration '(clojurescript-mode . "clojurescript-mode")))
+  (add-to-list 'lsp-language-id-configuration '(clojurescript-mode . "clojurescript-mode"))
+  (setq lsp-file-watch-ignored-directories
+        (append lsp-file-watch-ignored-directories
+                '("[/\\\\]\\.shadow-cljs\\'"
+                  "[/\\\\]\\.clj-kondo\\'"
+                  "[/\\\\]\\.cpcache\\'"
+                  "[/\\\\]\\.lsp\\'"
+                  "[/\\\\]public\\'"
+                  "[/\\\\]output\\'"
+                  "[/\\\\]elpa\\'"))))
 
 (use-package lsp-ui
   :after lsp-mode

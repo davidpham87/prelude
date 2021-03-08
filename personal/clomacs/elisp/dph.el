@@ -19,6 +19,12 @@
  :namespace jetdotter.core
  :doc "Convert string from one format to the other")
 
+(clomacs-defun
+ dph/clj-lein->deps
+ lein->deps
+ :namespace utils
+ :doc "Convert lein deps into deps.edn")
+
 ;; (defun dph/nrepl-callback (response)
 ;;   (let ((f (nrepl-make-response-handler
 ;;             (current-buffer)
@@ -94,6 +100,16 @@
     (delete-region (region-beginning) (region-end))
     (insert s)))
 
+(defun dph/lein->deps ()
+  "Hack function to transform pure data objects defined in javascript into pure data edn."
+  (interactive)
+  (let ((s (thread-first
+               (buffer-substring-no-properties
+                (region-beginning) (region-end))
+             dph/clj-lein->deps)))
+    (delete-region (region-beginning) (region-end))
+    (insert s)))
+
 ;; (parseedn-read-str (clj-rand-int 10))
 ;; (dph-clj-jetdotter-convert "{:api {:a 3 :b 2 :c [1 2 34]}}" :edn :json)
 ;; (bbmacs-bb-process)
@@ -103,7 +119,8 @@
 ;; (bbemacs-test)
 
 ;; {:api {:a 3, :b 2, :c [1 2 34]}}
-;; {:api {:a 3 :b 2 :c [1 2 34]}}
+;; {:api {:a 3, :b 2, :c [1 2 34]}}
+
 
 ;; (dph/clj-jetdotter-keywordize-keys "{a 3, b 2, c [1 2 34]}")
 ;; (dph/test-async)
