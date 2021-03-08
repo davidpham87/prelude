@@ -1,6 +1,6 @@
 ;;; prelude-ivy.el --- Ivy setup
 ;;
-;; Copyright © 2011-2020 Bozhidar Batsov
+;; Copyright © 2011-2021 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -32,15 +32,13 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(prelude-require-packages '(ivy ivy-prescient swiper counsel))
+(prelude-require-packages '(ivy swiper counsel))
 
 ;;; Ivy
 ;;
 ;; ivy is a powerful alternative to the popular ido-mode
 
 (require 'ivy)
-(require 'counsel)
-(require 'ivy-prescient) ;; must be loaded after counsel
 (require 'diminish)
 
 (ivy-mode 1)
@@ -48,9 +46,6 @@
 (setq enable-recursive-minibuffers t)
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 (global-set-key (kbd "<f6>") 'ivy-resume)
-
-;; smarter filtering and sorting for ivy
-(ivy-prescient-mode 1)
 
 (diminish 'ivy-mode)
 
