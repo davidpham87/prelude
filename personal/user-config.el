@@ -51,3 +51,7 @@
 
 (add-hook 'markdown-mode-hook 'pandoc-mode)
 (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
+
+(setenv "PATH" (concat "/Users/davidpham/bin:" (getenv "PATH")))
+
+(setq default-directory "/Users/davidpham")
