@@ -1,6 +1,6 @@
 ;;; prelude-xml.el --- Emacs Prelude: XML editing configuration.
 ;;
-;; Copyright © 2011-2020 Bozhidar Batsov
+;; Copyright © 2011-2021 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -35,7 +35,7 @@
 (push '("<\\?xml" . nxml-mode) magic-mode-alist)
 
 ;; pom files should be treated as xml files
-(add-to-list 'auto-mode-alist '("\\.pom$" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.pom\\'" . nxml-mode))
 
 (setq nxml-child-indent 4)
 (setq nxml-attribute-indent 4)

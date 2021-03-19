@@ -1,6 +1,6 @@
 ;;; prelude-global-keybindings.el --- Emacs Prelude: some useful keybindings.
 ;;
-;; Copyright © 2011-2020 Bozhidar Batsov
+;; Copyright © 2011-2021 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -44,9 +44,10 @@
 
 ;; Indentation help
 (global-set-key (kbd "C-^") 'crux-top-join-line)
+
 ;; Start proced in a similar manner to dired
 (unless (eq system-type 'darwin)
-    (global-set-key (kbd "C-x p") 'proced))
+  (global-set-key (kbd "C-x p") 'proced))
 
 ;; Start eshell or switch to it if it's active.
 (global-set-key (kbd "C-x m") 'eshell)
@@ -78,10 +79,7 @@
 (global-set-key (kbd "M-Z") 'zop-to-char)
 
 ;; kill lines backward
-(global-set-key (kbd "C-<backspace>") (lambda ()
-                                        (interactive)
-                                        (kill-line 0)
-                                        (indent-according-to-mode)))
+(global-set-key (kbd "C-<backspace>") 'crux-kill-line-backwards)
 
 (global-set-key [remap kill-whole-line] 'crux-kill-whole-line)
 
@@ -97,13 +95,23 @@
 ;; toggle menu-bar visibility
 (global-set-key (kbd "<f12>") 'menu-bar-mode)
 
-(global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key (kbd "C-x M-g") 'magit-dispatch)
+;; Magit creates some global keybindings by default
+;; but it's a nice to complement them with this one
+(global-set-key (kbd "C-c g") 'magit-file-dispatch)
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-(global-set-key (kbd "C-c j") 'avy-goto-word-or-subword-1)
+;; recommended avy keybindings
+(global-set-key (kbd "C-:") 'avy-goto-char)
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "M-g f") 'avy-goto-line)
+(global-set-key (kbd "M-g w") 'avy-goto-word-1)
+(global-set-key (kbd "M-g e") 'avy-goto-word-0)
+
+;; additional avy keybindings
+(global-set-key (kbd "s-,") 'avy-goto-char)
 (global-set-key (kbd "s-.") 'avy-goto-word-or-subword-1)
+(global-set-key (kbd "C-c v") 'avy-goto-word-or-subword-1)
 
 ;; improved window navigation with ace-window
 (global-set-key (kbd "s-w") 'ace-window)

@@ -1,6 +1,6 @@
 ;;; prelude-packages.el --- Emacs Prelude: default package selection.
 ;;
-;; Copyright © 2011-2020 Bozhidar Batsov
+;; Copyright © 2011-2021 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -55,9 +55,9 @@
 
 (defvar prelude-packages
   '(ace-window
+    ag
     avy
     anzu
-    beacon
     browse-kill-ring
     crux
     discover-my-major
@@ -141,7 +141,11 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
                                  (,mode)))))
 
 (defvar prelude-auto-install-alist
-  '(("\\.clj\\'" clojure-mode clojure-mode)
+  '(("\\.adoc\\'" adoc-mode adoc-mode)
+    ("\\.clj\\'" clojure-mode clojure-mode)
+    ("\\.cljc\\'" clojure-mode clojurec-mode)
+    ("\\.cljs\\'" clojure-mode clojurescript-mode)
+    ("\\.edn\\'" clojure-mode clojure-mode)
     ("\\.cmake\\'" cmake-mode cmake-mode)
     ("CMakeLists\\.txt\\'" cmake-mode cmake-mode)
     ("\\.coffee\\'" coffee-mode coffee-mode)
@@ -161,6 +165,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.groovy\\'" groovy-mode groovy-mode)
     ("\\.haml\\'" haml-mode haml-mode)
     ("\\.hs\\'" haskell-mode haskell-mode)
+    ("\\.jl\\'" julia-mode julia-mode)
     ("\\.json\\'" json-mode json-mode)
     ("\\.kt\\'" kotlin-mode kotlin-mode)
     ("\\.kv\\'" kivy-mode kivy-mode)
@@ -196,6 +201,12 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . gfm-mode))
   (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode)))
 
+;; same with adoc-mode
+(when (package-installed-p 'adoc-mode)
+  (add-to-list 'auto-mode-alist '("\\.adoc\\'" . adoc-mode))
+  (add-to-list 'auto-mode-alist '("\\.asciidoc\\'" . adoc-mode)))
+
+;; and pkgbuild-mode
 (when (package-installed-p 'pkgbuild-mode)
   (add-to-list 'auto-mode-alist '("PKGBUILD\\'" . pkgbuild-mode)))
 

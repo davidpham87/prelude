@@ -26,3 +26,13 @@ network-security.data
 prelude-cheatsheet.el
 prelude-cheatsheet.aux
 prelude-cheatsheet.log
+transient/  
+var/
+org-roam.db
+anaconda-mode/* 
+eln-cache/*
+.cache/
+.clj-kondo/
+.lsp-session-v1
+.lsp/
+.lsp-session*  

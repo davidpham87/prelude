@@ -1,6 +1,6 @@
 ;;; prelude-programming.el --- Emacs Prelude: prog-mode configuration
 ;;
-;; Copyright © 2011-2020 Bozhidar Batsov
+;; Copyright © 2011-2021 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -65,7 +65,8 @@
              prelude-flyspell)
     (flyspell-prog-mode))
   (when prelude-guru
-    (guru-mode +1))
+    (guru-mode +1)
+    (diminish 'guru-mode))
   (smartparens-mode +1)
   (prelude-enable-whitespace)
   (prelude-local-comment-auto-fill))

@@ -48,8 +48,6 @@
     (progn (cider-find-ns "-" kw-ns)
            (search-forward-regexp (concat "reg-[a-zA-Z-]*[ \\\n]+" kw-to-find) nil 'noerror))))
 
-
-
 (global-set-key (kbd "M-0") 're-frame-jump-to-reg)
 
 (provide 're-jump)
