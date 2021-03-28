@@ -1,3 +1,6 @@
+(use-package company
+  :ensure t)
+
 (use-package lsp-mode
   :ensure t
   :commands lsp
@@ -17,12 +20,16 @@
   (lsp-mode . lsp-enable-which-key-integration)
   :config
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+
   (setq lsp-keymap-prefix "C-c l")
   (setq lsp-enable-indentation nil)
   (setq lsp-enable-xref nil)
+  (setq lsp-enable-completion-at-point nil)
+
   (add-to-list 'lsp-language-id-configuration '(clojure-mode . "clojure-mode"))
   (add-to-list 'lsp-language-id-configuration '(clojurec-mode . "clojurec-mode"))
   (add-to-list 'lsp-language-id-configuration '(clojurescript-mode . "clojurescript-mode"))
+
   (setq lsp-file-watch-ignored-directories
         (append lsp-file-watch-ignored-directories
                 '("[/\\\\]\\.shadow-cljs\\'"
