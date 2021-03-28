@@ -25,57 +25,40 @@
   :config
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
-(use-package exwm
-  :if (string= (getenv "exwm_x_enable") "yes")
-  :ensure t
-  :config
+(defun init-exwm ()
+  (interactive)
+  (use-package exwm
+    :ensure t
+    :config
 
-  (setq exwm-workspace-number 5)
+    (setq exwm-workspace-number 5)
 
-  (setq exwm-input-prefix-keys
-        '(?\C-x
-          ?\C-u
-          ?\C-h
-          ?\M-x
-          ?\M-`
-          ?\M-&
-          ?\M-:
-          ?\C-\M-j  ;; Buffer list
-          ?\C-\ ))
+    (setq exwm-input-prefix-keys
+          '(?\C-x
+            ?\C-u
+            ?\C-h
+            ?\M-x
+            ?\M-1
+            ?\M-2
+            ?\M-&
+            ?\M-:
+            ?\C-'
+            ?\s-'
+            ?\C-§))
 
-  ;; Set up global key bindings.  These always work, no matter the input state!
-  ;; Keep in mind that changing this list after EXWM initializes has no effect.
-  (setq exwm-input-global-keys
-        `(
-          ;; Reset to line-mode (C-c C-k switches to char-mode via exwm-input-release-keyboard)
-          ([?\s-r] . exwm-reset)
+    (define-key global-map [?\s-a] 'counsel-linux-app)
+    (define-key global-map [?\s-'] 'exwm-workspace-switch)
+    (define-key global-map [s-left] 'windmove-left)
+    (define-key global-map [s-right] 'windmove-right)
 
-          ;; Move between windows
-          ([s-left] . windmove-left)
-          ([s-right] . windmove-right)
-          ([s-up] . windmove-up)
-          ([s-down] . windmove-down)
+    (mapcar
+     (lambda (i)
+       (define-key global-map (kbd (format "s-%d" i))
+         (lambda () (intera ctive) (exwm-workspace-switch ,i))))
+     (number-sequence 0 9))
 
-          ;; Launch applications via shell command
-          ([?\s-&] . (lambda (command)
-                       (interactive (list (read-shell-command "$ ")))
-                       (start-process-shell-command command nil command)))
 
-          ;; Switch workspace
-          ([?\s-w] . exwm-workspace-switch)
-          ([?\s-`] . (lambda () (interactive) (exwm-workspace-switch-create 0)))
-
-          ;; 's-N': Switch to certain workspace with Super (Win) plus a number key (0 - 9)
-          ,@(mapcar (lambda (i)
-                      `(,(kbd (format "s-%d" i)) .
-                        (lambda ()
-                          (interactive)
-                          (exwm-workspace-switch-create ,i))))
-                    (number-sequence 0 9))))
-
-  (exwm-input-set-key (kbd "s-SPC") 'counsel-linux-app)
-
-  (exwm-enable))
+    (exwm-enable)))
 
 (defun dph.windows/make (n)
   (interactive "nNumber of split: ")
@@ -83,3 +66,32 @@
   (dotimes (i (- n 1))
     (split-window-right))
   (balance-windows))
+
+(defun dph.windows/balance+x+y (x y)
+  (interactive "nNumber of window on left: \nnNumber of window on right:" )
+  (select-window (frame-first-window))
+  (when (<= (+ x y) (length (window-list)))
+    (let* ((w (frame-width))
+           (w-left (/ w 2 x))
+           (w-right (/ w 2 y))
+           (wins (window-list))
+           (wins-left (seq-take wins x))
+           (wins-right (seq-drop wins x)))
+
+      (mapcar (lambda (win)
+                (window-resize win (- w-left (window-width win) 1) t))
+              wins-left)
+
+      (mapcar (lambda (win)
+                (window-resize win (- w-right (window-width win) 1) t))
+              wins-right))))
+
+(defun dph.windows/make-3+1 ()
+  (interactive)
+  (dph.windows/make 4)
+  (dph.windows/balance+x+y 3 1))
+
+(defun dph.windows/make-3+2 ()
+  (interactive)
+  (dph.windows/make 5)
+  (dph.windows/balance+x+y 3 2))
