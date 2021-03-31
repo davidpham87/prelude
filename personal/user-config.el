@@ -1,4 +1,5 @@
 ;; Python configure
+(require 'dash)
 
 (setq dired-guess-shell-alist-user
       '(("\\.pdf$" "evince") ("\\.html$" "google-chrome")))
@@ -25,42 +26,8 @@
   :config
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
-(defun init-exwm ()
-  (interactive)
-  (use-package exwm
-    :ensure t
-    :config
-
-    (setq exwm-workspace-number 5)
-
-    (setq exwm-input-prefix-keys
-          '(?\C-x
-            ?\C-u
-            ?\C-h
-            ?\M-x
-            ?\M-1
-            ?\M-2
-            ?\M-&
-            ?\M-:
-            ?\C-'
-            ?\s-'
-            ?\C-§))
-
-    (define-key global-map [?\s-a] 'counsel-linux-app)
-    (define-key global-map [?\s-'] 'exwm-workspace-switch)
-    (define-key global-map [s-left] 'windmove-left)
-    (define-key global-map [s-right] 'windmove-right)
-
-    (mapcar
-     (lambda (i)
-       (define-key global-map (kbd (format "s-%d" i))
-         (lambda () (intera ctive) (exwm-workspace-switch ,i))))
-     (number-sequence 0 9))
-
-
-    (exwm-enable)))
-
 (defun dph.windows/make (n)
+  "Create evenly n spread windows"
   (interactive "nNumber of split: ")
   (delete-other-windows)
   (dotimes (i (- n 1))
@@ -78,20 +45,43 @@
            (wins-left (seq-take wins x))
            (wins-right (seq-drop wins x)))
 
-      (mapcar (lambda (win)
-                (window-resize win (- w-left (window-width win) 1) t))
-              wins-left)
+      (-map
+       (lambda (win)
+         (window-resize win (- w-left (window-width win) 1) t))
+       wins-left)
 
-      (mapcar (lambda (win)
-                (window-resize win (- w-right (window-width win) 1) t))
-              wins-right))))
+      (-map
+       (lambda (win)
+         (window-resize win (- w-right (window-width win) 1) t))
+       wins-right))))
 
-(defun dph.windows/make-3+1 ()
+(defun dph.windows/balance (s)
+  (interactive "sNumber of window left x right (.e.g 3x1): ")
+  (let* ((args (-map #'string-to-number (split-string s "[x ]")))
+        (x (-first-item args))
+        (y (-last-item args)))
+    (dph.windows/balance+x+y x y)))
+
+(defun dph.windows/make-2+1 ()
+  "Split the frame in two, and the left half is spread into 3 equally spaced window"
   (interactive)
   (dph.windows/make 4)
-  (dph.windows/balance+x+y 3 1))
+  (select-window (frame-first-window))
+  (let* ((wins (reverse (window-list))))
+    (delete-window (-first-item wins))))
+
+(defun dph.windows/make-3+1 ()
+  "Split the frame in two, and the left half is spread into 3 equally spaced window"
+  (interactive)
+  (dph.windows/make 6)
+  (select-window (frame-first-window))
+  (let* ((wins (reverse (window-list))))
+    (delete-window (-first-item wins))
+    (delete-window (-second-item wins))))
 
 (defun dph.windows/make-3+2 ()
+  "Split the frame in two, the left half is spread into 3 equally spaced window, the right half into 2."
   (interactive)
-  (dph.windows/make 5)
-  (dph.windows/balance+x+y 3 2))
+  (dph.windows/make-3+1)
+  (select-window (-last-item (window-list)))
+  (split-window-right))

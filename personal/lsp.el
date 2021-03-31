@@ -26,6 +26,14 @@
   (setq lsp-enable-xref nil)
   (setq lsp-enable-completion-at-point nil)
 
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (setq lsp-enable-completion-at-point t)))
+
+  (add-hook 'clojure-mode-hook
+            (lambda ()
+              (setq lsp-enable-completion-at-point nil)))
+
   (add-to-list 'lsp-language-id-configuration '(clojure-mode . "clojure-mode"))
   (add-to-list 'lsp-language-id-configuration '(clojurec-mode . "clojurec-mode"))
   (add-to-list 'lsp-language-id-configuration '(clojurescript-mode . "clojurescript-mode"))
