@@ -74,23 +74,58 @@
 
     (exwm-enable)))
 
+(defun dph.exwm.win/select-windows (n)
+  (dotimes (i n)
+    (other-window 1)
+    (switch-to-buffer (other-buffer (current-buffer)))))
+
 (defun dph.exwm.win/system-monitors ()
   (interactive)
-  ;; (tab-new 0)
 
-  ;; you can only have a single gnome-system-monitor
-  ;; (start-process-shell-command "system-monitor" nil "gnome-system-monitor -r")
-
-  ;; (start-process-shell-command "firefox" nil "firefox")
-  ;; (call-process "gtk-launch" nil 0 nil "htop")
+  (tab-new 1)
+  (tab-rename "System Monitors")
 
   (dph.windows/make 1)
+
   (start-process-shell-command "htop" nil "gnome-terminal -e htop")
   (start-process-shell-command "system-monitor" nil "gnome-system-monitor")
-  (sit-for 2)
-  (dph.windows/make 4)
+
+  (sit-for 3)
+  (dph.windows/make 2)
   (select-window (frame-first-window))
-  (other-window 1)
-  (switch-to-buffer "Gnome-system-monitor:System Monitor"))
+  (other-window 1))
+
+(defun dph.exwm.win/chats ()
+  (interactive)
+  (tab-new 1)
+  (tab-rename "Chats")
+  (dph.windows/make 4)
+
+  (start-process-shell-command "signal" nil "signal-desktop")
+  (start-process-shell-command "whatsapp" nil "google-chrome --new-window web.whatsapp.com")
+  (start-process-shell-command "chats" nil "google-chrome --new-window
+   https://app.slack.com/client/T03RZGPFR/C8NUSGWG6/thread/C0KL616MN-1599922108.113000
+   https://discord.com/channels/808815302941868063/808815302941868065
+   https://clojurians.zulipchat.com/#narrow")
+
+  (sit-for 2)
+  (dph.exwm.win/select-windows 3))
+
+(defun dph.exwm.win/home ()
+  (interactive)
+  (tab-new 1)
+  (tab-rename "Music+News")
+  (dph.windows/make-2+1)
+
+  (start-process-shell-command "music" nil "google-chrome --new-window
+   https://music.youtube.com")
+  (start-process-shell-command "Browse" nil "google-chrome")
+  (start-process-shell-command "news" nil "google-chrome --new-window
+   https://www.nytimes.com/
+   https://www.pressreader.com/catalog
+   https://www.newscientist.com/")
+
+  (sit-for 1)
+  (dph.exwm.win/select-windows 2))
 
 ;; (dph.exwm.win/system-monitors)
