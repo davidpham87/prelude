@@ -26,6 +26,7 @@
             ?\M-2
             ?\M-3
             ?\M-4
+            ?\M-5
             ?\M-&
             ?\M-:
             ?\C-'
@@ -44,10 +45,15 @@
             ([?\C-f] . [right])
             ([?\M-f] . [C-right])
             ([?\M-đ] . [C-right])
+            ([?\M-d] . [S-C-right delete])
+            ([?\M-é] . [S-C-left delete])
             ([?\C-p] . [up])
             ([?\C-n] . [down])
-            ([?\C-a] . [home])
+            ([?\C-\a] . [home])
+            ([?\M-m] . [home])
+            ([?\M-a] . [home])
             ([?\C-e] . [end])
+            ([?\C-\é] . [S-left delete])
             ([?\C-g] . [escape])
             ([?\M-v] . [prior])
             ([?\M-“] . [prior])
@@ -79,6 +85,10 @@
     (other-window 1)
     (switch-to-buffer (other-buffer (current-buffer)))))
 
+(defun dph.exwm/gnome-terminal ()
+  (interactive)
+  (start-process-shell-command "gnome-terminal" nil "gnome-terminal"))
+
 (defun dph.exwm.win/system-monitors ()
   (interactive)
 
@@ -101,30 +111,32 @@
   (tab-rename "Chats")
   (dph.windows/make 4)
 
-  (start-process-shell-command "signal" nil "signal-desktop")
+
   (start-process-shell-command "whatsapp" nil "google-chrome --new-window web.whatsapp.com")
-  (start-process-shell-command "chats" nil "google-chrome --new-window
-   https://app.slack.com/client/T03RZGPFR/C8NUSGWG6/thread/C0KL616MN-1599922108.113000
-   https://discord.com/channels/808815302941868063/808815302941868065
-   https://clojurians.zulipchat.com/#narrow")
+  (start-process-shell-command
+   "chats" nil
+   "google-chrome --new-window")
+  (start-process-shell-command
+   "chats" nil
+   "google-chrome --new-window https://app.slack.com/client/T03RZGPFR/C8NUSGWG6/ https://discord.com/channels/808815302941868063 https://clojurians.zulipchat.com/#narrow")
+  (start-process-shell-command "signal" nil "signal-desktop")
 
   (sit-for 2)
   (dph.exwm.win/select-windows 3))
 
-(defun dph.exwm.win/home ()
+(defun dph.exwm.win/news ()
   (interactive)
   (tab-new 1)
   (tab-rename "Music+News")
   (dph.windows/make-2+1)
 
-  (start-process-shell-command "music" nil "google-chrome --new-window
-   https://music.youtube.com")
+  (start-process-shell-command
+   "music" nil
+   "google-chrome --new-window https://music.youtube.com")
   (start-process-shell-command "Browse" nil "google-chrome")
-  (start-process-shell-command "news" nil "google-chrome --new-window
-   https://www.nytimes.com/
-   https://www.pressreader.com/catalog
-   https://www.newscientist.com/")
-
+  (start-process-shell-command
+   "news" nil
+   "google-chrome --new-window    https://www.nytimes.com/ https://www.pressreader.com/catalog https://www.newscientist.com/")
   (sit-for 1)
   (dph.exwm.win/select-windows 2))
 

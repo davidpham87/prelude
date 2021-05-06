@@ -45,8 +45,10 @@
                   "[/\\\\]\\.cpcache\\'"
                   "[/\\\\]\\.lsp\\'"
                   "[/\\\\]public\\'"
+                  "[/\\\\]remote-profile\\'"
                   "[/\\\\]output\\'"
-                  "[/\\\\]elpa\\'"))))
+                  "[/\\\\]elpa\\'"
+                  "[/\\\\]classes\\'"))))
 
 (use-package lsp-ui
   :after lsp-mode
