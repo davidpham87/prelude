@@ -1,15 +1,15 @@
-;;; prelude-company.el --- company-mode setup
+;;; prelude-racket.el --- Emacs Prelude: Racket programming support.
 ;;
 ;; Copyright © 2011-2021 Bozhidar Batsov
 ;;
-;; Author: Bozhidar Batsov <bozhidar@batsov.com>
+;; Author: Xiongfei Shi <xiongfei.shi@icloud.com>
 ;; URL: https://github.com/bbatsov/prelude
 
 ;; This file is not part of GNU Emacs.
 
 ;;; Commentary:
 
-;; company-mode config.
+;; Basic configuration for Racket programming.
 
 ;;; License:
 
@@ -29,22 +29,24 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(prelude-require-packages '(company))
 
-(require 'company)
-(require 'diminish)
+(prelude-require-packages '(racket-mode))
 
-(setq company-idle-delay 0.5)
-(setq company-show-numbers t)
-(setq company-tooltip-limit 10)
-(setq company-minimum-prefix-length 2)
-(setq company-tooltip-align-annotations t)
-;; invert the navigation direction if the the completion popup-isearch-match
-;; is displayed on top (happens near the bottom of windows)
-(setq company-tooltip-flip-when-above t)
+(require 'prelude-lisp)
 
-(global-company-mode 1)
-(diminish 'company-mode)
+(with-eval-after-load 'racket-mode
+  (define-key racket-mode-map (kbd "M-RET") 'racket-run)
+  (define-key racket-mode-map (kbd "M-.") 'racket-repl-visit-definition)
 
-(provide 'prelude-company)
-;;; prelude-company.el ends here
+  ;; Enable the common Lisp coding hook
+  (add-hook 'racket-mode-hook (lambda () (run-hooks 'prelude-lisp-coding-hook)))
+
+  (add-hook 'racket-mode-hook #'racket-unicode-input-method-enable)
+  (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable))
+
+(add-to-list 'auto-mode-alist '("\\.rkt?\\'" . racket-mode))
+(add-to-list 'auto-mode-alist '("\\.rkt\\'" . racket-mode))
+
+(provide 'prelude-racket)
+
+;;; prelude-racket ends here

@@ -4,11 +4,18 @@
 
 ### New features
 
+* Add a Racket module.
+* Add a Lua module.
+* Auto-install `racket-mode` if needed.
+
 ### Changes
 
 * Bind all essential `avy` commands to their recommended keybindings.
+* Remove `company-lsp`.
 
 ### Bugs fixed
+
+* Fix `company` still being visible in the mode line.
 
 ## 1.1.0 (2021-02-14)
 
