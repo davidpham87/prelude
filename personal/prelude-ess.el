@@ -32,10 +32,10 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-;; (prelude-require-package '(ess))
+(prelude-require-package '(ess))
 
 (when (boundp 'company-backends)
-  (prelude-require-package 'company-quickhelp)
+  (prelude-require-package '(company-quickhelp ess))
   (setq ess-use-auto-complete nil)
   (setq ess-use-company 'script-only)
   (add-to-list 'company-backends 'company-))
