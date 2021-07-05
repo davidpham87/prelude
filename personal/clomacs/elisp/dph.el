@@ -19,6 +19,18 @@
  :namespace jetdotter.core
  :doc "Convert string from one format to the other")
 
+(clomacs-defun
+ dph/clj-lein->deps
+ lein->deps
+ :namespace utils
+ :doc "Convert lein deps into deps.edn")
+
+(clomacs-defun
+ dph/clj-sym->map
+ sym->map
+ :namespace utils
+ :doc "Convert a region of symbols into a clojure map")
+
 ;; (defun dph/nrepl-callback (response)
 ;;   (let ((f (nrepl-make-response-handler
 ;;             (current-buffer)
@@ -83,6 +95,13 @@
   (interactive)
   (dph/data-from->to :yaml :edn))
 
+(defun dph/replace-region-with-result (f)
+  (let ((s (funcall f
+               (buffer-substring-no-properties
+                (region-beginning) (region-end)))))3
+    (delete-region (region-beginning) (region-end))
+    (insert s)))
+
 (defun dph/data-js->edn ()
   "Hack function to transform pure data objects defined in javascript into pure data edn."
   (interactive)
@@ -94,6 +113,15 @@
     (delete-region (region-beginning) (region-end))
     (insert s)))
 
+(defun dph/lein->deps ()
+  "Hack function to transform pure data objects defined in javascript into pure data edn."
+  (interactive)
+  (dph/replace-region-with-result 'dph/clj-lein->deps))
+
+(defun dph/sym->map ()
+  (interactive)
+  (dph/replace-region-with-result 'dph/clj-sym->map))
+
 ;; (parseedn-read-str (clj-rand-int 10))
 ;; (dph-clj-jetdotter-convert "{:api {:a 3 :b 2 :c [1 2 34]}}" :edn :json)
 ;; (bbmacs-bb-process)
@@ -103,11 +131,16 @@
 ;; (bbemacs-test)
 
 ;; {:api {:a 3, :b 2, :c [1 2 34]}}
-;; {:api {:a 3 :b 2 :c [1 2 34]}}
+;; {:api {:a 3, :b 2, :c [1 2 34]}}
+;; {:hello hello, :world world}
 
 ;; (dph/clj-jetdotter-keywordize-keys "{a 3, b 2, c [1 2 34]}")
 ;; (dph/test-async)
 ;; ;; (dph/test-sync)
 ;; (dph/clj-jetdotter-keywordize-keys-async "{a 3, b 2, c [1 2 34]}")
 
-;; lang-clojure.el ends here
+;;
+;; here make a ->kwargs function [takes a list of symbols
+;; and returns a map of symbols with them]
+
+;; lang-clojure.el ends

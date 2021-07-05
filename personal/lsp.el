@@ -1,3 +1,6 @@
+(use-package company
+  :ensure t)
+
 (use-package lsp-mode
   :ensure t
   :commands lsp
@@ -8,6 +11,7 @@
   :custom
   (lsp-auto-guess-root t)
   (lsp-file-watch-threshold 1500)  ; pyright has more than 1000
+
   :custom-face
   (lsp-face-highlight-read ((t (:underline t :background nil :foreground nil))))
   (lsp-face-highlight-write ((t (:underline t :background nil :foreground nil))))
@@ -16,12 +20,35 @@
   (lsp-mode . lsp-enable-which-key-integration)
   :config
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+
   (setq lsp-keymap-prefix "C-c l")
   (setq lsp-enable-indentation nil)
   (setq lsp-enable-xref nil)
+  (setq lsp-enable-completion-at-point nil)
+
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (setq lsp-enable-completion-at-point t)))
+
+  (add-hook 'clojure-mode-hook
+            (lambda ()
+              (setq lsp-enable-completion-at-point nil)))
+
   (add-to-list 'lsp-language-id-configuration '(clojure-mode . "clojure-mode"))
   (add-to-list 'lsp-language-id-configuration '(clojurec-mode . "clojurec-mode"))
-  (add-to-list 'lsp-language-id-configuration '(clojurescript-mode . "clojurescript-mode")))
+  (add-to-list 'lsp-language-id-configuration '(clojurescript-mode . "clojurescript-mode"))
+
+  (setq lsp-file-watch-ignored-directories
+        (append lsp-file-watch-ignored-directories
+                '("[/\\\\]\\.shadow-cljs\\'"
+                  "[/\\\\]\\.clj-kondo\\'"
+                  "[/\\\\]\\.cpcache\\'"
+                  "[/\\\\]\\.lsp\\'"
+                  "[/\\\\]public\\'"
+                  "[/\\\\]remote-profile\\'"
+                  "[/\\\\]output\\'"
+                  "[/\\\\]elpa\\'"
+                  "[/\\\\]classes\\'"))))
 
 (use-package lsp-ui
   :after lsp-mode

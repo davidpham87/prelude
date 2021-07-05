@@ -35,4 +35,4 @@ eln-cache/*
 .clj-kondo/
 .lsp-session-v1
 .lsp/
-  
+.lsp-session*  
