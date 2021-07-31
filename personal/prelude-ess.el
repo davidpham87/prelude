@@ -32,13 +32,7 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(prelude-require-package '(ess))
-
-(when (boundp 'company-backends)
-  (prelude-require-package '(company-quickhelp ess))
-  (setq ess-use-auto-complete nil)
-  (setq ess-use-company 'script-only)
-  (add-to-list 'company-backends 'company-))
+(prelude-require-package 'ess)
 
 (require 'electric)
 (require 'prelude-programming)
@@ -64,8 +58,6 @@
   (setq comint-move-point-for-output t)
   (local-set-key (kbd "<C-dead-circumflex>") 'ess-eval-fast)
   (rainbow-mode t)
-  (company-mode)
-  (company-quickhelp-mode)
   (rainbow-delimiters-mode t)
   (ess-set-style 'OWN))
 
