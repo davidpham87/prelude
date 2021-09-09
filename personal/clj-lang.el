@@ -5,7 +5,7 @@
 ;;   :hook clojure-mode
 ;;   :ensure t)
 
-(require 'flycheck-clj-kondo)
+;; (require 'flycheck-clj-kondo)
 
 (use-package clomacs
   :after (lsp)
@@ -13,7 +13,9 @@
 
 (use-package cider
   :after (lsp)
-  :ensure t)
+  :ensure t
+  :config
+  (global-set-key (kbd "C-è") 'cider-find-dwim))
 
 (defun bb-nrepl (port)
   (interactive "sPort: ")

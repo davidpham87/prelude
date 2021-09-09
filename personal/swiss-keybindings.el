@@ -11,7 +11,7 @@
 (delete-selection-mode t) ; Delete selection when pressing [delete] key
 (global-set-key (kbd "<C-dead-circumflex>") 'crux-top-join-line)
 (global-set-key (kbd "<M-dead-circumflex>") 'join-line)
-(global-set-key (kbd "M-j") 'join-line)
+;; (global-set-key (kbd "M-j") 'join-line)
 ;; In order to avoid to hit SPC everytime
 
 ;; Should be default but sometimes are overwritten
@@ -40,11 +40,6 @@
 ;;   (mapc key-mapper kmc))
 
 ;; ;; This is to make mac friendly
-;; (setq mac-function-modifier 'control
-;;       mac-command-modifier 'control
-;;       mac-right-command-modifier 'control
-;;       mac-control-modifier 'meta
-;;       mac-right-option-modifier 'option)
 
 ;; Mac settings to have the same feeling as pc keyboard
 (global-set-key (kbd "M-à") '"{")
