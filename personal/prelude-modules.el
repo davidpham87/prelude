@@ -8,5 +8,7 @@
 (require 'prelude-yaml)
 (require 'prelude-company)
 (require 'prelude-latex)
-(require 'prelude-ivy)
+;; (require 'prelude-ivy)
+(require 'prelude-helm)
+(require 'prelude-helm-everywhere)
 (require 'prelude-lsp)
