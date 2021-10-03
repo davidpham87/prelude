@@ -20,6 +20,90 @@ between emacs and a nrepl server.
 This repository provides shows how you can set up clomacs and babashka to start
 hacking
 
+# Example of usage
+
+Let's define `utils` clojure `ns`
+
+``` clojure
+(ns utils
+  (:require
+   [clojure.edn :as edn]
+   [clojure.pprint]
+   [clojure.string :as str]))
+
+(defn pretty-format [x]
+  (with-out-str (clojure.pprint/pprint x)))
+
+(defn lein->deps [s]
+  (->>
+   (for [[p v] (edn/read-string s)] [p {:mvn/version v}])
+   (into {})
+   pretty-format))
+
+(defn sym->map [s]
+  (let [xs (-> s
+               (str/split #" ")
+               sort)]
+    (->
+     (zipmap (map keyword xs) (map symbol xs))
+     pretty-format)))
+```
+This is an elisp function that calls a clojure function that parse the lein
+deps and return deps.edn map.
+
+``` emacs-lisp
+(clomacs-defun
+ dph/clj-lein->deps
+ lein->deps
+ :namespace utils
+ :doc "Convert lein deps into deps.edn")
+
+(dph/clj-lein->deps
+ "[[datascript/datascript \"1.10.0\"]
+   [reagent/reagent \"1.10.0\"]]")
+
+;; => "{datascript/datascript {:mvn/version \"1.10.0\"}
+;;      reagent/reagent {:mvn/version \"1.10.0\"}}"
+
+(clomacs-defun
+ dph/clj-sym->map
+ sym->map
+ :namespace utils
+ :doc "Convert a region of symbols into a clojure map")
+
+(dph/clj-sym->map "foo bar opts")
+;; "{:bar bar, :foo foo, :opts opts}"
+
+```
+
+Usually, you desire to mark a region and apply a function to its content. Let's
+define this function and wrap the previous ones.
+
+``` emacs-lisp
+(defun dph/replace-region-with-result (f)
+  (let ((s (funcall f
+                    (buffer-substring-no-properties
+                     (region-beginning) (region-end)))))3
+                     (delete-region (region-beginning) (region-end))
+                     (insert s)))
+
+(defun dph/lein->deps ()
+  "Hack function to transform pure data objects defined in javascript into pure data edn."
+  (interactive)
+  (dph/replace-region-with-result 'dph/clj-lein->deps))
+
+(defun dph/sym->map ()
+  (interactive)
+  (dph/replace-region-with-result 'dph/clj-sym->map))
+```
+
+Now, if you mark the region with `foo bar opts` and call `M-x dph/sym->map` the region will be replaced with `{:bar bar, :foo foo, :opts opts}`.
+
+So you can write your own content manipulation with clojure and all its
+library, instead of the elisp. A more convoluted example could be that you want
+to interact with the shell, or make API calls, which is much easier in
+Clojure/Babashka.
+
 # Installation
 
 
