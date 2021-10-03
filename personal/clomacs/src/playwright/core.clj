@@ -1,4 +1,4 @@
-(ns playwright.core
+<(ns playwright.core
   (:require
    [clojure.pprint]
    [clojure.string :as str]))
@@ -33,14 +33,15 @@
 
 (defn code->clj [s]
   (let [lines (str/split-lines s)]
-    (into [] (comp
-              (map #(-> %
-                        replace-comment
-                        remove-await
-                        remove-ending-semi-colon
-                        parse-page-method))
-              (remove expect-page-url?))
-          lines)))
+    (->> (into [] (comp
+                   (map #(-> %
+                             replace-comment
+                             remove-await
+                             remove-ending-semi-colon
+                             parse-page-method))
+                   (remove expect-page-url?))
+               lines)
+         (str/join "\n"))))
 
 (comment
   (let [s "// Go to http://localhost:8000/
@@ -71,7 +72,4 @@
   await expect(page).toHaveURL('http://localhost:8000/#/funds');"]
     (println (str/join "\n" (code->clj s))))
   (clojure.pprint/cl-format nil "(.click page ~A)" "hello")
-  (clojure.pprint/cl-format nil "(.~A page ~A)" "hello" "world")
-  (find-method "page.click('text=Swiss Francs CHF')")
-  "page.click()"
-  "page.goto()")
+  (clojure.pprint/cl-format nil "(.~A page ~A)" "hello" "world"))
