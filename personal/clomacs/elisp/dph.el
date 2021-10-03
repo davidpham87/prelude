@@ -31,6 +31,12 @@
  :namespace utils
  :doc "Convert a region of symbols into a clojure map")
 
+(clomacs-defun
+ dph/clj-playwright-codegen->clj
+ code->clj
+ :namespace playwright.core
+ :doc "Convert a region of made by playwright codegen to valid clojure code")
+
 ;; (defun dph/nrepl-callback (response)
 ;;   (let ((f (nrepl-make-response-handler
 ;;             (current-buffer)
@@ -121,6 +127,10 @@
 (defun dph/sym->map ()
   (interactive)
   (dph/replace-region-with-result 'dph/clj-sym->map))
+
+(defun dph/playwright-codegen->clj ()
+  (interactive)
+  (dph/replace-region-with-result 'dph/clj-playwright-codegen->clj))
 
 ;; (parseedn-read-str (clj-rand-int 10))
 ;; (dph-clj-jetdotter-convert "{:api {:a 3 :b 2 :c [1 2 34]}}" :edn :json)
