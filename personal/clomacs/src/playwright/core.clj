@@ -1,4 +1,4 @@
-<(ns playwright.core
+(ns playwright.core
   (:require
    [clojure.pprint]
    [clojure.string :as str]))
