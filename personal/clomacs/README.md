@@ -1,4 +1,4 @@
-# Emacs + Clojure = Babasha+Clomacs
+# Emacs + Clojure = Babashka+Clomacs
 
 This project describe how you can interact emacs with clojure through babashka.
 
@@ -17,7 +17,7 @@ it on your `$PATH`).
 [Clomacs](https://github.com/clojure-emacs/clomacs) allows to communicate
 between emacs and a nrepl server.
 
-This repository provides shows how you can set up clomacs and babashka to start
+This repository shows how you can set up clomacs and babashka to start
 hacking
 
 # Example of usage
@@ -166,7 +166,7 @@ conflict between repls.
 
 ## Parseedn
 
-Parseedn allows to parse the resulting edn into elisp format as well.
+Parseedn allows to parse the resulting edn into elisp format..
 
 ## Location of the library
 
@@ -177,4 +177,4 @@ default.
 # Performance
 
 Don't forget that your making call to the nrepl at each evaluation of clomacs
-function, so make sure to balance between composability and perfromance.
+function, so make sure to balance between composability and performance.
