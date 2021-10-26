@@ -1,4 +1,4 @@
-# Emacs + Clojure = Babashka+Clomacs
+# Emacs + Clojure = Babashka + Clomacs
 
 This project describe how you can interact emacs with clojure through babashka.
 
