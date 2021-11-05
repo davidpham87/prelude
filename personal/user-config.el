@@ -26,6 +26,9 @@
   :config
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
+(use-package bufler
+  :ensure t)
+
 (defun dph.windows/make (n)
   "Create evenly n spread windows"
   (interactive "nNumber of split: ")

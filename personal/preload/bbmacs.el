@@ -35,11 +35,20 @@
 (defvar bbmacs-port 1659)
 
 (defun bbmacs-connect ()
+  "Start an babashka nREPL server for the current project and connect to it."
   (interactive)
-  (cider-connect-clj
-   (list :host "localhost"
-         :port bbmacs-port
-         :project-dir bbmacs-clomacs-dir)))
+  (let* ((process-filter
+          (lambda (proc string)
+            "Run cider-connect once babashka nrepl server is ready."
+            (when (string-match "Started nREPL server at .+:\\([0-9]+\\)" string)
+              (cider-connect-clj (list :host "localhost"
+                                       :port (match-string 1 string)
+                                       :project-dir bbmacs-clomacs-dir)))
+            ;; Default behavior: write to process buffer
+            (internal-default-process-filter proc string))))
+    (set-process-filter
+     (start-file-process "babashka" "*babashka*" "bb" "--nrepl-server" (number-to-string bbmacs-port))
+     process-filter)))
 
 (cl-defun bbmacs-bb-process
     (&optional (dir bbmacs-clomacs-dir) (port bbmacs-port))
@@ -60,8 +69,6 @@
 
 (defun bbmacs-init ()
   (interactive)
-  (bbmacs-bb-process bbmacs-clomacs-dir bbmacs-port)
-  (sleep-for 0 500)
   (bbmacs-connect))
 
 (defun bbmacs-reset ()
