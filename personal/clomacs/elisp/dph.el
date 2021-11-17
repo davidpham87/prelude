@@ -37,6 +37,18 @@
  :namespace playwright.core
  :doc "Convert a region of made by playwright codegen to valid clojure code")
 
+(clomacs-defun
+ dph/clj-portal
+ portal
+ :namespace rebl
+ :doc "Open a portal server on port 53755")
+
+(clomacs-defun
+ dph/clj->portal
+ submit
+ :namespace rebl
+ :doc "Submit value on port 53755")
+
 ;; (defun dph/nrepl-callback (response)
 ;;   (let ((f (nrepl-make-response-handler
 ;;             (current-buffer)
@@ -104,7 +116,7 @@
 (defun dph/replace-region-with-result (f)
   (let ((s (funcall f
                (buffer-substring-no-properties
-                (region-beginning) (region-end)))))3
+                (region-beginning) (region-end)))))
     (delete-region (region-beginning) (region-end))
     (insert s)))
 
@@ -131,6 +143,16 @@
 (defun dph/playwright-codegen->clj ()
   (interactive)
   (dph/replace-region-with-result 'dph/clj-playwright-codegen->clj))
+
+(defun dph/portal ()
+  (interactive)
+  (dph/clj-portal))
+
+(defun dph/->portal ()
+  (interactive)
+  (dph/clj->portal
+   (buffer-substring-no-properties
+    (region-beginning) (region-end))))
 
 ;; (parseedn-read-str (clj-rand-int 10))
 ;; (dph-clj-jetdotter-convert "{:api {:a 3 :b 2 :c [1 2 34]}}" :edn :json)

@@ -37,7 +37,8 @@
 (defun bbmacs-connect ()
   "Start an babashka nREPL server for the current project and connect to it."
   (interactive)
-  (let* ((process-filter
+  (let* ((default-directory bbmacs-clomacs-dir)
+           (process-filter
           (lambda (proc string)
             "Run cider-connect once babashka nrepl server is ready."
             (when (string-match "Started nREPL server at .+:\\([0-9]+\\)" string)
