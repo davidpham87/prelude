@@ -49,6 +49,12 @@
  :namespace rebl
  :doc "Submit value on port 53755")
 
+(clomacs-defun
+ dph/clj-html->hiccup
+ html->hiccup
+ :namespace html
+ :doc "Submit value on port 53755")
+
 ;; (defun dph/nrepl-callback (response)
 ;;   (let ((f (nrepl-make-response-handler
 ;;             (current-buffer)
@@ -154,6 +160,10 @@
    (buffer-substring-no-properties
     (region-beginning) (region-end))))
 
+(defun dph/html->hiccup ()
+  (interactive)
+  (dph/replace-region-with-result 'dph/clj-html->hiccup))
+
 ;; (parseedn-read-str (clj-rand-int 10))
 ;; (dph-clj-jetdotter-convert "{:api {:a 3 :b 2 :c [1 2 34]}}" :edn :json)
 ;; (bbmacs-bb-process)
@@ -174,5 +184,8 @@
 ;;
 ;; here make a ->kwargs function [takes a list of symbols
 ;; and returns a map of symbols with them]
+
+;; <a href="hello"/>
+;; <a href="hello"/>
 
 ;; lang-clojure.el ends
