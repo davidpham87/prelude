@@ -1,5 +1,5 @@
 (require 'iso-transl)
-;; (use-package dash)
+(use-package bufler)
 ;; (use-package paredit-mode)
 
 (global-set-key (kbd "C-§") 'other-frame)
@@ -11,7 +11,7 @@
 (delete-selection-mode t) ; Delete selection when pressing [delete] key
 (global-set-key (kbd "<C-dead-circumflex>") 'crux-top-join-line)
 (global-set-key (kbd "<M-dead-circumflex>") 'join-line)
-(global-set-key (kbd "M-j") 'join-line)
+;; (global-set-key (kbd "M-j") 'join-line)
 ;; In order to avoid to hit SPC everytime
 
 ;; Should be default but sometimes are overwritten
@@ -40,11 +40,6 @@
 ;;   (mapc key-mapper kmc))
 
 ;; ;; This is to make mac friendly
-;; (setq mac-function-modifier 'control
-;;       mac-command-modifier 'control
-;;       mac-right-command-modifier 'control
-;;       mac-control-modifier 'meta
-;;       mac-right-option-modifier 'option)
 
 ;; Mac settings to have the same feeling as pc keyboard
 (global-set-key (kbd "M-à") '"{")
@@ -84,7 +79,7 @@
 (define-key key-translation-map (kbd "Ŧ") (kbd "M-T"))
 (global-set-key (kbd "M-T")  'sp-transpose-sexp)
 
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-x C-b") 'bufler)
 
 ;; ;; Rebind altgr + key to the correct default behavior
 ;; ;; To get the same alt as the american keyboard

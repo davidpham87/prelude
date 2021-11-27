@@ -95,22 +95,20 @@
   (tab-new 1)
   (tab-rename "System Monitors")
 
-  (dph.windows/make 1)
-
+  (dph.windows/make 3)
+  (dph.windows/balance+x+y 2 1)
   (start-process-shell-command "htop" nil "gnome-terminal -e htop")
+  (dph.exwm/gnome-terminal)
   (start-process-shell-command "system-monitor" nil "gnome-system-monitor")
-
   (sit-for 3)
-  (dph.windows/make 2)
-  (select-window (frame-first-window))
-  (other-window 1))
+  (dph.exwm.win/select-windows 3)
+  (select-window (frame-first-window)))
 
 (defun dph.exwm.win/chats ()
   (interactive)
   (tab-new 1)
   (tab-rename "Chats")
   (dph.windows/make 4)
-
 
   (start-process-shell-command "whatsapp" nil "google-chrome --new-window web.whatsapp.com")
   (start-process-shell-command
@@ -119,9 +117,9 @@
   (start-process-shell-command
    "chats" nil
    "google-chrome --new-window https://app.slack.com/client/T03RZGPFR/C8NUSGWG6/ https://discord.com/channels/808815302941868063 https://clojurians.zulipchat.com/#narrow")
+  (sit-for 1)
   (start-process-shell-command "signal" nil "signal-desktop")
-
-  (sit-for 2)
+  (sit-for 1)
   (dph.exwm.win/select-windows 3))
 
 (defun dph.exwm.win/news ()
