@@ -33,9 +33,14 @@
 
 ;;; Code:
 (prelude-require-package 'ess)
+(prelude-require-package 'company)
+(prelude-require-package 'company-quickhelp)
 
 (require 'electric)
 (require 'prelude-programming)
+
+
+
 
 (defun prelude-ess-mode-defaults ()
   "Defaults for ess programming."
