@@ -36,3 +36,5 @@ eln-cache/*
 .lsp-session-v1
 .lsp/
 .lsp-session*  
+request/*
+projects
