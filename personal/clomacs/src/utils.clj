@@ -20,3 +20,6 @@
     (->
      (zipmap (map keyword xs) (map symbol xs))
      pretty-format)))
+
+(defn split-space [s]
+  (str/split (str/replace s #"\"" "") #" "))
