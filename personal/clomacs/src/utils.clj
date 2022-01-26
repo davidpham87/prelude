@@ -23,3 +23,5 @@
 
 (defn split-space [s]
   (str/split (str/replace s #"\"" "") #" "))
+
+(defn uuid [] (.toString (java.util.UUID/randomUUID)))
