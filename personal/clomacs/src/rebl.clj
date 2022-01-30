@@ -1,7 +1,8 @@
 (ns rebl
   (:require [portal.api]
             [portal.client.jvm]
-            [clojure.edn :as edn]))
+            [clojure.edn :as edn]
+            [cheshire.core :as json]))
 
 (defn portal []
   (portal.api/open {:portal.launcher/port 53755}))
@@ -10,4 +11,5 @@
 
 (comment
   #_(portal.api/open)
+  (portal.client.jvm/submit (json/parse-string (slurp "/home/david/Documents/ocio-backend/public/data/fundlist.json")))
   )

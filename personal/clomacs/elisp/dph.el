@@ -55,6 +55,18 @@
  :namespace html
  :doc "Submit value on port 53755")
 
+(clomacs-defun
+ dph/clj-split-space
+ split-space
+ :namespace utils
+ :doc "Split string")
+
+(clomacs-defun
+ dph/clj-uuid
+ uuid
+ :namespace utils
+ :doc "Generate a uuid")
+
 ;; (defun dph/nrepl-callback (response)
 ;;   (let ((f (nrepl-make-response-handler
 ;;             (current-buffer)
@@ -163,6 +175,14 @@
 (defun dph/html->hiccup ()
   (interactive)
   (dph/replace-region-with-result 'dph/clj-html->hiccup))
+
+(defun dph/str-split-space ()
+  (interactive)
+  (dph/replace-region-with-result 'dph/clj-split-space))
+
+(defun dph/uuid ()
+  (interactive)
+  (insert (dph/clj-uuid)))
 
 ;; (parseedn-read-str (clj-rand-int 10))
 ;; (dph-clj-jetdotter-convert "{:api {:a 3 :b 2 :c [1 2 34]}}" :edn :json)

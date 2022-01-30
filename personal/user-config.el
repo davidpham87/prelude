@@ -29,6 +29,12 @@
 (use-package bufler
   :ensure t)
 
+(use-package lsp-grammarly
+  :ensure t
+  :hook (text-mode . (lambda ()
+                       (require 'lsp-grammarly)
+                       (lsp))))  ; or lsp-deferred
+
 (defun dph.windows/make (n)
   "Create evenly n spread windows"
   (interactive "nNumber of split: ")
