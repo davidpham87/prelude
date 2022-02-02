@@ -16,10 +16,14 @@
   (eshell nil)
   (rename-buffer "*eshell*<shadow-cljs>"))
 
-(prelude-require-package 'pandoc-mode)
+(use-package docker
+  :ensure t)
 
-(add-hook 'markdown-mode-hook 'pandoc-mode)
-(add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
+(use-package pandoc-mode
+  :ensure t
+  :config
+  (add-hook 'markdown-mode-hook 'pandoc-mode)
+  (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings))
 
 (use-package pdf-tools
   :ensure t
