@@ -64,10 +64,14 @@
    ((t (:inherit nil :background nil :foreground nil :weight semi-bold
                  :box (:line-width -1))))))
 
-(use-package lsp-grammarly
-  :after lsp-mode
-  :ensure t)
+;; (use-package lsp-grammarly
+;;   :after lsp-mode
+;;   :ensure t
+;;   :hook ((latex-mode . lsp)
+;;          (markdown-mode . lsp)
+;;          (org-mode . lsp)))
 
 ;; (setq lsp-ui-doc-position 'at-point)
 ;; (setq lsp-ui-doc-delay 10.0)
+
 ;; (setq lsp-ui-sideline-delay 10.0)
