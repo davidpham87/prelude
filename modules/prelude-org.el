@@ -1,6 +1,6 @@
 ;;; prelude-org.el --- Emacs Prelude: org-mode configuration.
 ;;
-;; Copyright © 2011-2021 Bozhidar Batsov
+;; Copyright © 2011-2022 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -31,6 +31,7 @@
 ;;; Code:
 
 (require 'org)
+(require 'org-habit)
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
@@ -40,6 +41,7 @@
 (global-set-key "\C-cb" 'org-switchb)
 
 (setq org-log-done t)
+(setq org-log-into-drawer t)
 
 (defun prelude-org-mode-defaults ()
   (let ((oldmap (cdr (assoc 'prelude-mode minor-mode-map-alist)))
