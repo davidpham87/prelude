@@ -1,6 +1,6 @@
 ;;; prelude-js.el --- Emacs Prelude: js-mode configuration.
 ;;
-;; Copyright © 2011-2022 Bozhidar Batsov
+;; Copyright © 2011-2023 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -35,9 +35,10 @@
 
 (require 'js2-mode)
 
-(add-to-list 'auto-mode-alist '("\\.js\\'"    . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.pac\\'"   . js2-mode))
-(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'"     . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.[cm]js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.pac\\'"    . js2-mode))
+(add-to-list 'interpreter-mode-alist '("node"  . js2-mode))
 
 (with-eval-after-load 'js2-mode
   (defun prelude-js-mode-defaults ()

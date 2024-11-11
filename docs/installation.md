@@ -72,6 +72,8 @@ $ cd ~/.emacs.d
 
     If you are using Windows, you should check what Emacs thinks the `~` directory is by running Emacs
     and typing `C-x d ~/<RET>`, and then adjust the command appropriately.
+    It is recommended to explicitly set HOME environment variable.
+    For details, please refer to [Emacs manual Windows-HOME section](https://www.gnu.org/software/emacs/manual/html_node/emacs/Windows-HOME.html)
 
 ### System-wide (site-wide)
 
@@ -116,8 +118,8 @@ modules visit the [docs](modules/index.md).
 ;;; General productivity tools
 
 ;; (require 'prelude-ido) ;; Supercharges Emacs completion for C-x C-f and more
-(require 'prelude-ivy) ;; A mighty modern alternative to ido
-;; (require 'prelude-selectrum) ;; A powerful, yet simple, alternative to ivy
+;; (require 'prelude-ivy) ;; A mighty modern alternative to ido
+(require 'prelude-vertico) ;; A powerful, yet simple, alternative to ivy
 ;; (require 'prelude-helm) ;; Interface for narrowing and search
 ;; (require 'prelude-helm-everywhere) ;; Enable Helm everywhere
 (require 'prelude-company)
