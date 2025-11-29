@@ -1,6 +1,6 @@
 ;;; prelude-helm.el --- Helm setup
 ;;
-;; Copyright © 2011-2023 Bozhidar Batsov
+;; Copyright © 2011-2025 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -31,9 +31,11 @@
 
 ;;; Code:
 
-(prelude-require-packages '(helm helm-projectile))
+(prelude-require-package 'helm)
 
-(require 'helm-projectile)
+(when prelude-projectile
+  (prelude-require-package 'helm-projectile)
+  (require 'helm-projectile))
 
 (when (executable-find "curl")
   (setq helm-google-suggest-use-curl-p t))

@@ -1,6 +1,6 @@
 ;;; init.el --- Prelude's configuration entry point.
 ;;
-;; Copyright (c) 2011-2023 Bozhidar Batsov
+;; Copyright (c) 2011-2025 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -72,6 +72,9 @@ by Prelude.")
   "This folder stores all the automatically generated save/history-files.")
 (defvar prelude-modules-file (expand-file-name "prelude-modules.el" prelude-personal-dir)
   "This file contains a list of modules that will be loaded by Prelude.")
+(defvar prelude-override-package-user-dir t
+  "By default prelude installs downloaded packages in <prelude-dir>/elpa.
+   Set to nil to override this behaviour")
 
 (unless (file-exists-p prelude-savefile-dir)
   (make-directory prelude-savefile-dir))
@@ -99,9 +102,9 @@ by Prelude.")
 (setq large-file-warning-threshold 100000000)
 
 ;; preload the personal settings from `prelude-personal-preload-dir'
-(when (file-exists-p prelude-personal-preload-dir)
-  (message "[Prelude] Loading personal configuration files in %s..." prelude-personal-preload-dir)
-  (mapc 'load (directory-files prelude-personal-preload-dir 't "^[^#\.].*el$")))
+(when (file-directory-p prelude-personal-preload-dir)
+  (message "[Prelude] Loading personal configuration files from files and directories in %s..." prelude-personal-preload-dir)
+  (mapc 'load (directory-files-recursively prelude-personal-preload-dir "^[^#\.].*el$")))
 
 (message "[Prelude] Loading Prelude's core modules...")
 

@@ -1,6 +1,6 @@
 ;;; prelude-mode.el --- Emacs Prelude: minor mode
 ;;
-;; Copyright © 2011-2023 Bozhidar Batsov
+;; Copyright © 2011-2025 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -65,10 +65,11 @@
     (define-key map (kbd "C-c I") 'crux-find-user-init-file)
     (define-key map (kbd "C-c S") 'crux-find-shell-init-file)
     (define-key map (kbd "C-c i") 'imenu-anywhere)
-    ;; extra prefix for projectile
-    (when prelude-super-keybindings
-     (define-key map (kbd "s-p") 'projectile-command-map))
-    (define-key map (kbd "C-c p") 'projectile-command-map)
+    (when prelude-projectile
+      ;; extra prefix for projectile
+      (when prelude-super-keybindings
+        (define-key map (kbd "s-p") 'projectile-command-map))
+      (define-key map (kbd "C-c p") 'projectile-command-map))
     ;; make some use of the Super key
     (when prelude-super-keybindings
       ;; crux
@@ -83,7 +84,8 @@
       (define-key map (kbd "s-m l") 'magit-log-buffer-file)
       (define-key map (kbd "s-m b") 'magit-blame)
       ;; misc
-      (define-key map (kbd "s-/") 'hippie-expand))
+      (when prelude-hippie-expand
+        (define-key map (kbd "s-/") 'hippie-expand)))
     (easy-menu-define prelude-mode-menu map
       "Prelude's menu."
       '("Prelude"

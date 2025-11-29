@@ -1,6 +1,6 @@
 ;;; prelude-editor.el --- Emacs Prelude: enhanced core editing experience.
 ;;
-;; Copyright © 2011-2023 Bozhidar Batsov
+;; Copyright © 2011-2025 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -59,16 +59,17 @@
 (global-auto-revert-mode t)
 
 ;; hippie expand is dabbrev expand on steroids
-(setq hippie-expand-try-functions-list '(try-expand-dabbrev
-                                         try-expand-dabbrev-all-buffers
-                                         try-expand-dabbrev-from-kill
-                                         try-complete-file-name-partially
-                                         try-complete-file-name
-                                         try-expand-all-abbrevs
-                                         try-expand-list
-                                         try-expand-line
-                                         try-complete-lisp-symbol-partially
-                                         try-complete-lisp-symbol))
+(when prelude-hippie-expand
+  (setq hippie-expand-try-functions-list '(try-expand-dabbrev
+                                           try-expand-dabbrev-all-buffers
+                                           try-expand-dabbrev-from-kill
+                                           try-complete-file-name-partially
+                                           try-complete-file-name
+                                           try-expand-all-abbrevs
+                                           try-expand-list
+                                           try-expand-line
+                                           try-complete-lisp-symbol-partially
+                                           try-complete-lisp-symbol)))
 
 ;; smart tab behavior - indent or complete
 (setq tab-always-indent 'complete)
@@ -221,9 +222,10 @@
       bookmark-save-flag 1)
 
 ;; projectile is a project management mode
-(require 'projectile)
-(setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
-(projectile-mode t)
+(when prelude-projectile
+  (require 'projectile)
+  (setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
+  (projectile-mode t))
 
 ;; avy allows us to effectively navigate to visible things
 (require 'avy)
@@ -358,14 +360,20 @@ indent yanked text (with prefix arg don't indent)."
 ;; enable Prelude's keybindings
 (prelude-mode t)
 
-;; supercharge your undo/redo with undo-tree
-(require 'undo-tree)
-;; autosave the undo-tree history
-(setq undo-tree-history-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq undo-tree-auto-save-history t)
-(global-undo-tree-mode)
-(diminish 'undo-tree-mode)
+(defun prelude-maybe-enable-undo-tree ()
+  "Enable `undo-tree' if `prelude-undo-tree' is not nil."
+  (when prelude-undo-tree
+    ;; supercharge your undo/redo with undo-tree
+    (require 'undo-tree)
+    ;; autosave the undo-tree history
+    (setq undo-tree-history-directory-alist
+          `((".*" . ,temporary-file-directory)))
+    (setq undo-tree-auto-save-history t)
+    (global-undo-tree-mode)
+    (diminish 'undo-tree-mode)))
+
+
+(prelude-maybe-enable-undo-tree)
 
 ;; enable winner-mode to manage window configurations
 (winner-mode +1)
