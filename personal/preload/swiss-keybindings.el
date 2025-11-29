@@ -79,7 +79,7 @@
 (define-key key-translation-map (kbd "Ŧ") (kbd "M-T"))
 (global-set-key (kbd "M-T")  'sp-transpose-sexp)
 
-(global-set-key (kbd "C-x C-b") 'bufler)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; ;; Rebind altgr + key to the correct default behavior
 ;; ;; To get the same alt as the american keyboard
